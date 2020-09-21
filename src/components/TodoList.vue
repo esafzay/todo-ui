@@ -38,13 +38,13 @@ export default {
   },
   data() {
     return {
-      todos: [
-        { todoString: "Todo task 1", completed: false },
-        { todoString: "Todo task 2", completed: true },
-        { todoString: "Todo task 3", completed: true },
-        { todoString: "Todo task 4", completed: false }
-      ]
+      todos: null
     };
+  },
+  mounted () {
+    fetch("https://run.mocky.io/v3/cef4cab2-5ad3-459b-9bf1-d7aaef676045")
+    .then(response => response.json())
+    .then(data => (this.todos = data));
   },
   methods: {
     addTodo(newTodo) {
