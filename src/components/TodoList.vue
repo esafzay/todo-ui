@@ -16,7 +16,7 @@
           <Todo
             v-for="(todo, index) in todos"
             :key="index"
-            :todoString="todo.todoString"
+            :task="todo.task"
             :completed="todo.completed"
             @on-delete="deleteTodo(todo)"
             @on-toggle="toggleTodo(todo)"
@@ -42,14 +42,14 @@ export default {
     };
   },
   mounted () {
-    fetch("https://run.mocky.io/v3/cef4cab2-5ad3-459b-9bf1-d7aaef676045")
+    fetch("http://localhost:8070/todo")
     .then(response => response.json())
     .then(data => (this.todos = data));
   },
   methods: {
     addTodo(newTodo) {
       this.todos.push({
-        todoString: newTodo,
+        task: newTodo,
         completed: false
       });
     },
@@ -57,7 +57,7 @@ export default {
       todo.completed = !todo.completed;
     },
     editTodo(todo, newTodoString) {
-      todo.todoString = newTodoString;
+      todo.task = newTodoString;
     },
     deleteTodo(deleteTodo) {
       this.todos = this.todos.filter(todo => todo !== deleteTodo);

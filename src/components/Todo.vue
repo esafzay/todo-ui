@@ -5,7 +5,7 @@
       :class="{completed}"
       @click="$emit('on-toggle')"
       class="btn border-0 text-left flex-grow-1"
-    >{{todoString}}</button>
+    >{{task}}</button>
     <form v-else @submit.prevent="endEditing()" class="flex-grow-1">
       <input @blur="startEditing()" v-model="newTodoString" type="text" class="form-control" />
     </form>
@@ -21,7 +21,7 @@
 <script>
 export default {
   props: {
-    todoString: String,
+    task: String,
     completed: Boolean
   },
   data() {
@@ -33,7 +33,7 @@ export default {
   methods: {
     startEditing() {
       if (!this.isEditing) {
-        this.newTodoString = this.todoString;
+        this.newTodoString = this.task;
         this.isEditing = true;
       } else {
         this.endEditing();
