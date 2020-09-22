@@ -42,16 +42,19 @@ export default {
     };
   },
   mounted () {
-    fetch("http://localhost:8070/todo")
-    .then(response => response.json())
-    .then(data => (this.todos = data));
+    this.getTodos()
   },
   methods: {
-    addTodo(newTodo) {
-      this.todos.push({
-        task: newTodo,
-        completed: false
-      });
+    getTodos() {
+      fetch("http://localhost:8070/todo")
+      .then(response => response.json())
+      .then(data => (this.todos = data));
+    },
+    addTodo(newTask) {
+      fetch('http://localhost:8070/todo', {
+        method: 'POST',
+        body: newTask
+      }).then(() => this.getTodos());
     },
     toggleTodo(todo) {
       todo.completed = !todo.completed;
