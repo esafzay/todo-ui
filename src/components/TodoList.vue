@@ -60,7 +60,13 @@ export default {
       this.newTask = "";
     },
     toggleTodo(todo) {
-      todo.completed = !todo.completed;
+      fetch('http://localhost:8070/todo/' + todo.id, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: !todo.completed
+      }).then(() => this.getTodos());
     },
     deleteTodo(deleteTodo) {
       fetch('http://localhost:8070/todo/' + deleteTodo.id, {
