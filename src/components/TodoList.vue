@@ -7,7 +7,9 @@
     </div>
     <div class="row">
       <div class="col-12 mb-2">
-        <NewTodo @on-addtodo="addTodo($event)" />
+        <form v-on:submit.prevent="addTodo" class="col-12 col-lf-6">
+          <input v-model="newTask" id="new-todo" placeholder="Write a ToDo" type="text" class="form-control" />
+        </form>
       </div>
     </div>
     <div class="row">
@@ -30,15 +32,14 @@
 
 <script>
 import Todo from "./Todo";
-import NewTodo from "./NewTodo";
 export default {
   components: {
-    Todo,
-    NewTodo
+    Todo
   },
   data() {
     return {
-      todos: null
+      todos: null,
+      newTask: ""
     };
   },
   mounted () {
@@ -50,11 +51,15 @@ export default {
       .then(response => response.json())
       .then(data => (this.todos = data));
     },
-    addTodo(newTask) {
-      fetch('http://localhost:8070/todo', {
-        method: 'POST',
-        body: newTask
-      }).then(() => this.getTodos());
+    addTodo() {
+      if (this.newTask.length > 1) {
+        fetch('http://localhost:8070/todo', {
+          method: 'POST',
+          body: this.newTask
+        }).then(() => this.getTodos());
+      }
+
+      this.newTask = "";
     },
     toggleTodo(todo) {
       todo.completed = !todo.completed;
