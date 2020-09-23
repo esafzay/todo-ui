@@ -1,16 +1,7 @@
 <template>
   <li class="d-flex align-items-center list-group-item">
-    <button
-      v-if="!isEditing"
-      :class="{completed}"
-      @click="$emit('on-toggle')"
-      class="btn border-0 text-left flex-grow-1"
-    >{{task}}</button>
-    <form v-else @submit.prevent="endEditing()" class="flex-grow-1">
-      <input @blur="startEditing()" v-model="newTodoString" type="text" class="form-control" />
-    </form>
-    <button @click="startEditing()" class="btn btn-outline-primary mx-2">
-      <i class="fa fa-pencil-alt"></i>
+    <button :class="{completed}" @click="$emit('on-toggle')" class="btn border-0 text-left flex-grow-1">
+      {{task}}
     </button>
     <button @click="$emit('on-delete')" class="btn btn-outline-danger">
       <i class="fa fa-trash-alt"></i>
@@ -23,26 +14,6 @@ export default {
   props: {
     task: String,
     completed: Boolean
-  },
-  data() {
-    return {
-      isEditing: false,
-      newTodoString: ""
-    };
-  },
-  methods: {
-    startEditing() {
-      if (!this.isEditing) {
-        this.newTodoString = this.task;
-        this.isEditing = true;
-      } else {
-        this.endEditing();
-      }
-    },
-    endEditing() {
-      this.isEditing = false;
-      this.$emit("on-edit", this.newTodoString);
-    }
   }
 };
 </script>
