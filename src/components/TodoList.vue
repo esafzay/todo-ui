@@ -8,7 +8,7 @@
     <div class="row">
       <div class="col-12 mb-2">
         <form v-on:submit.prevent="addTodo" class="col-12 col-lf-6">
-          <input v-model="newTask" id="new-todo" placeholder="Write a ToDo" type="text" class="form-control" />
+          <input v-model="newTask" placeholder="Create a new ToDo" type="text" class="form-control" />
         </form>
       </div>
     </div>
