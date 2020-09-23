@@ -16,8 +16,8 @@
       <div class="col-12">
         <ul class="list-group">
           <Todo
-            v-for="(todo, index) in todos"
-            :key="index"
+            v-for="todo in todos"
+            :key="todo.id"
             :task="todo.task"
             :completed="todo.completed"
             @on-delete="deleteTodo(todo)"
@@ -63,7 +63,9 @@ export default {
       todo.completed = !todo.completed;
     },
     deleteTodo(deleteTodo) {
-      this.todos = this.todos.filter(todo => todo !== deleteTodo);
+      fetch('http://localhost:8070/todo/' + deleteTodo.id, {
+        method: 'DELETE'
+      }).then(() => this.getTodos());
     }
   }
 };
