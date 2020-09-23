@@ -22,7 +22,6 @@
             :completed="todo.completed"
             @on-delete="deleteTodo(todo)"
             @on-toggle="toggleTodo(todo)"
-            @on-edit="editTodo(todo, $event)"
           />
         </ul>
       </div>
@@ -58,14 +57,10 @@ export default {
           body: this.newTask
         }).then(() => this.getTodos());
       }
-
       this.newTask = "";
     },
     toggleTodo(todo) {
       todo.completed = !todo.completed;
-    },
-    editTodo(todo, newTodoString) {
-      todo.task = newTodoString;
     },
     deleteTodo(deleteTodo) {
       this.todos = this.todos.filter(todo => todo !== deleteTodo);
