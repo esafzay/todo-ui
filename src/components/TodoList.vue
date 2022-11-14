@@ -46,13 +46,13 @@ export default {
   },
   methods: {
     getTodos() {
-      fetch("http://ec2-18-218-206-209.us-east-2.compute.amazonaws.com:8070/todo")
+      fetch(this.config.crossOrigin + "/todo")
       .then(response => response.json())
       .then(data => (this.todos = data));
     },
     addTodo() {
       if (this.newTask.length > 1) {
-        fetch('http://ec2-18-218-206-209.us-east-2.compute.amazonaws.com:8070/todo', {
+        fetch(this.config.crossOrigin + "/todo", {
           method: 'POST',
           body: this.newTask
         }).then(() => this.getTodos());
@@ -60,7 +60,7 @@ export default {
       this.newTask = "";
     },
     toggleTodo(todo) {
-      fetch('http://ec2-18-218-206-209.us-east-2.compute.amazonaws.com:8070/todo/' + todo.id, {
+      fetch(this.config.crossOrigin + "/todo/" + todo.id, {
         method: 'PUT',
         headers: {
           'Content-type': 'application/json'
@@ -69,7 +69,7 @@ export default {
       }).then(() => this.getTodos());
     },
     deleteTodo(deleteTodo) {
-      fetch('http://ec2-18-218-206-209.us-east-2.compute.amazonaws.com:8070/todo/' + deleteTodo.id, {
+      fetch(this.config.crossOrigin + "/todo/" + deleteTodo.id, {
         method: 'DELETE'
       }).then(() => this.getTodos());
     }

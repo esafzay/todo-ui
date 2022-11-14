@@ -1,4 +1,12 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
-createApp(App).mount('#app')
+let app = createApp(App)
+
+fetch("/config.json")
+    .then(response => response.json())
+    .then(json => {
+
+        app.config.globalProperties.config = json;
+        app.mount('#app');
+    })
