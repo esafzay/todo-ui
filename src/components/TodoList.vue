@@ -15,7 +15,7 @@
     <div class="row">
       <div class="col-12">
         <ul class="list-group">
-          <Todo
+          <TodoItem
             v-for="todo in todos"
             :key="todo.id"
             :task="todo.task"
@@ -30,10 +30,10 @@
 </template>
 
 <script>
-import Todo from "./Todo";
+import TodoItem from "./TodoItem";
 export default {
   components: {
-    Todo
+    TodoItem
   },
   data() {
     return {
